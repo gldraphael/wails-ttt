@@ -1,4 +1,6 @@
-# README
+# wails-exp
+
+> Experimenting with wails
 
 ## About
 
