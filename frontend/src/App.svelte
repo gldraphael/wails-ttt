@@ -1,16 +1,20 @@
-<script lang="ts">
-  import Tile from './Tile.svelte';
-  import { gameState } from './GameState.svelte'
-  
-</script>
-
 <div class="container">
-  <main>
-    {#each gameState.board as tileState, i}
-      <Tile  tileState={tileState} index={i}  />
-    {/each}
-  </main>
+  {#if gameState.gameStatus == GameStatus.New}
+    <MenuScreen />
+  {:else if gameState.gameStatus == GameStatus.InGame}
+    <GameplayScreen />
+  {:else}
+    <GameOverScreen />
+  {/if}
 </div>
+
+<script lang="ts">
+  import GameOverScreen from './screens/GameoverScreen.svelte';
+  import GameplayScreen from './screens/GameplayScreen.svelte';  
+  import MenuScreen from './screens/MenuScreen.svelte';
+  import { gameState } from './state/GameState.svelte';
+  import { GameStatus } from './state/GameStatus';
+</script>
 
 <style>
   .container {
@@ -21,12 +25,5 @@
     margin: auto;
 
     padding: 1rem;
-    box-sizing: border-box;
-  }
-  main {
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
   }
 </style>
